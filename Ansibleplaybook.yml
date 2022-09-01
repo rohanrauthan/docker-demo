@@ -1,0 +1,20 @@
+---
+- hosts: all
+  tasks:
+  - name: Stop the running Container
+    command: docker stop Docker-demo
+    ignore_errors: True
+    
+  - name: Remove the stopped Container
+    command: docker rm Docker-demo
+    ignore_errors: True
+    
+  - name: Remove the image
+    command: docker rmi demo
+    ignore_errors: True
+    
+  - name: Create an image 
+    command: docker build -t demo .
+    
+  - name: Creating a container
+    command: docker run -d -P --name=Docker-demo demo
